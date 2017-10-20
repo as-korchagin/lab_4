@@ -10,7 +10,7 @@ class Unique(object):
             self.ignore_case = kwargs['ignore_case']
         except KeyError:
             pass
-        self.items = items.copy()
+        self.items = [item for item in items]
 
     def __next__(self):
         return_value = None

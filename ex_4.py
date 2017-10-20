@@ -1,4 +1,4 @@
-from lab_4.librip.decorators import print_result
+from librip.decorators import print_result
 
 
 # Необходимо верно реализовать print_result

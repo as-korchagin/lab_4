@@ -1,14 +1,15 @@
 import json
 import sys
-from lab_4.librip.ctxmngrs import Timer
-from lab_4.librip.decorators import print_result
-from lab_4.librip.gens import field, gen_random
-from lab_4.librip.iterators import Unique as unique
+from librip.ctxmngrs import Timer
+from librip.decorators import print_result
+from librip.gens import field, gen_random
+from librip.iterators import Unique as unique
 
 # Здесь необходимо в переменную path получить
 # путь до файла, который был передан при запуске
 
-path = sys.argv[1]
+# path = sys.argv[1]
+path = './data_light.json'
 with open(path) as f:
     data = json.load(f)
 
@@ -22,7 +23,7 @@ with open(path) as f:
 
 @print_result
 def f1(arg):
-    return list(j for j in unique(list(i.get("job-name") for i in arg), ignore_case=True))
+    return list(unique(field(arg, 'job-name'), ignore_case=True))
 
 
 @print_result
@@ -37,7 +38,7 @@ def f3(arg):
 
 @print_result
 def f4(arg):
-    a = list(zip(arg, list(gen_random(100000, 200000, 1)[0] for i in range(len(arg)))))
+    a = list(zip(arg, list(gen_random(100000, 200000, 1)[0] for _ in range(len(arg)))))
     return list(map(lambda i: "{}, зарплата {} руб.".format(i[0], i[1]), a))
 
 
