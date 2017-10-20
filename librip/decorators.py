@@ -3,8 +3,6 @@ def print_result(func):
         def decorate():
             try:
                 result = func(arg)
-                for i in result:
-                    print(i)
                 print(func.__name__)
                 if arg is not None and type(result) is not tuple:
                     result = sorted(filter(lambda x: x is not None, list(i for i in result)),

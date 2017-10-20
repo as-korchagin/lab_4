@@ -1,5 +1,5 @@
 import json
-import sys
+
 from librip.ctxmngrs import Timer
 from librip.decorators import print_result
 from librip.gens import field, gen_random
@@ -38,8 +38,9 @@ def f3(arg):
 
 @print_result
 def f4(arg):
-    a = list(zip(arg, list(gen_random(100000, 200000, 1)[0] for _ in range(len(arg)))))
+    a = list(zip(arg, list(gen_random(100000, 200000, len(arg)))))
     return list(map(lambda i: "{}, зарплата {} руб.".format(i[0], i[1]), a))
+
 
 
 with Timer():

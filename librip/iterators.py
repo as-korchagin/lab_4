@@ -5,30 +5,31 @@ class Unique(object):
     result = set()
     index = 0
 
+    item_gen = None
+
     def __init__(self, items, **kwargs):
         try:
             self.ignore_case = kwargs['ignore_case']
         except KeyError:
             pass
-        self.items = [item for item in items]
+        self.item_gen = items
 
     def __next__(self):
         return_value = None
-        if self.index < len(self.items):
-            if type(self.items[self.index]) != str:
-                if self.items[self.index] not in self.result:
-                    self.result.add(self.items[self.index])
-                    return_value = self.items[self.index]
+        for i in self.item_gen:
+            if type(i) != str:
+                if i not in self.result:
+                    self.result.add(i)
+                    return_value = i
             else:
                 if not self.ignore_case:
-                    if self.items[self.index] not in self.result:
-                        self.result.add(self.items[self.index])
-                        return_value = self.items[self.index]
+                    if i not in self.result:
+                        self.result.add(i)
+                        return_value = i
                 else:
-                    if str.lower(self.items[self.index]) not in self.result:
-                        self.result.add(str.lower(self.items[self.index]))
-                        return_value = self.items[self.index]
-            self.index += 1
+                    if str.lower(i) not in self.result:
+                        self.result.add(str.lower(i))
+                        return_value = i
             return return_value
         else:
             raise StopIteration
