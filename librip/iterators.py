@@ -15,22 +15,23 @@ class Unique(object):
         self.item_gen = items
 
     def __next__(self):
-        return_value = None
         for i in self.item_gen:
             if type(i) != str:
                 if i not in self.result:
                     self.result.add(i)
-                    return_value = i
-            else:
-                if not self.ignore_case:
-                    if i not in self.result:
-                        self.result.add(i)
-                        return_value = i
+                    return i
+            if self.ignore_case:
+                if i in self.result:
+                    continue
                 else:
-                    if str.lower(i) not in self.result:
-                        self.result.add(str.lower(i))
-                        return_value = i
-            return return_value
+                    self.result.add(i)
+                    return i
+            else:
+                if i.lower() in self.result:
+                    continue
+                else:
+                    self.result.add(i.lower())
+                    return i
         else:
             raise StopIteration
 

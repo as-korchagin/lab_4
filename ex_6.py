@@ -3,7 +3,7 @@ import json
 from librip.ctxmngrs import Timer
 from librip.decorators import print_result
 from librip.gens import field, gen_random
-from librip.iterators import Unique as unique
+from librip.iterators import Unique
 
 # Здесь необходимо в переменную path получить
 # путь до файла, который был передан при запуске
@@ -23,7 +23,7 @@ with open(path) as f:
 
 @print_result
 def f1(arg):
-    return list(unique(field(arg, 'job-name'), ignore_case=True))
+    return list(sorted(Unique(field(arg, 'job-name'), ignore_case=False), key=lambda x: x.lower()))
 
 
 @print_result
@@ -42,6 +42,6 @@ def f4(arg):
     return list(map(lambda i: "{}, зарплата {} руб.".format(i[0], i[1]), a))
 
 
-
 with Timer():
     f4(f3(f2(f1(data))))
+# f1(data)

@@ -14,7 +14,7 @@ goods = [
 for i in gen_random(1, 50, 9):
     print(i, end=' ')
 
+print()
 
-for i in field(goods, 'title', 'color'):
+for i in field(goods, 'title', 'price'):
     print(i)
-
