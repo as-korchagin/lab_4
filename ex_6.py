@@ -44,4 +44,3 @@ def f4(arg):
 
 with Timer():
     f4(f3(f2(f1(data))))
-# f1(data)
